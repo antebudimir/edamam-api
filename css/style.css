@@ -1,0 +1,120 @@
+/* Base rules */
+* {
+	box-sizing: border-box;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+}
+
+html {
+	color: var(--text-color);
+	font-family: 'Mulish', sans-serif;
+}
+
+:root {
+	--body-bg-color: rgb(187, 248, 248);
+	--body-linear-grad: linear-gradient(
+		30deg,
+		rgb(243, 248, 171) 0%,
+		rgb(255, 246, 123) 30%,
+		rgb(255, 189, 103) 70%,
+		#ffc038 100%
+	);
+	--nav-bg-color: white;
+	--text-color: rgb(37, 35, 35);
+}
+
+/* Layout rules */
+body {
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: 100vh;
+	padding: 2rem;
+	background: var(--body-linear-grad);
+}
+
+header {
+	text-align: center;
+}
+
+img,
+input,
+select,
+textarea {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+input {
+	margin-left: 1rem;
+}
+
+h1 {
+	margin-bottom: 1rem;
+}
+
+h2,
+h3 {
+	margin: 2rem 0 1rem;
+	text-align: center;
+}
+
+p {
+	margin: 1rem 0;
+	line-height: 1.5;
+}
+
+.details {
+	text-align: center;
+}
+
+li {
+	list-style: none;
+	line-height: 1.5;
+}
+
+li:first-of-type {
+	margin-top: 0.5rem;
+}
+
+img {
+	border-radius: 0.2rem;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.meal-image {
+	margin: 0 auto;
+}
+
+input {
+	border: none;
+	border-radius: 0.2rem;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	width: 10rem;
+}
+
+#search-ingredient {
+	display: flex;
+	justify-content: center;
+}
+
+@media screen and (min-width: 600px) {
+	html {
+		font-size: 150%;
+	}
+}
+
+#meals {
+	text-align: center;
+}
+
+ul {
+	display: inline-block;
+	text-align: left;
+}
+
+.instructions {
+	text-align: left;
+}
