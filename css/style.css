@@ -30,6 +30,8 @@ body {
 	display: flex;
 	flex-flow: column nowrap;
 	min-height: 100vh;
+	max-width: 60rem;
+	margin: 0 auto;
 	padding: 2rem;
 	background: var(--body-linear-grad);
 }
@@ -66,8 +68,9 @@ p {
 	line-height: 1.5;
 }
 
-.details {
-	text-align: center;
+ul {
+	display: inline-block;
+	text-align: left;
 }
 
 li {
@@ -77,6 +80,10 @@ li {
 
 li:first-of-type {
 	margin-top: 0.5rem;
+}
+
+#meals {
+	text-align: center;
 }
 
 img {
@@ -104,17 +111,4 @@ input {
 	html {
 		font-size: 150%;
 	}
-}
-
-#meals {
-	text-align: center;
-}
-
-ul {
-	display: inline-block;
-	text-align: left;
-}
-
-.instructions {
-	text-align: left;
 }
