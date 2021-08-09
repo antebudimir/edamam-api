@@ -34,47 +34,104 @@ const updateUI = (recipes) => {
 
 	recipes.hits.forEach((hit) => {
 		// console.log(hit);
+		const properties = hit.recipe;
 
-		// cuisineType check
-		let cuisineType;
-		if (hit.recipe.cuisineType !== undefined || '') {
-			cuisineType = hit.recipe.cuisineType;
-		} else {
-			cuisineType = 'Not available';
+		const calories = properties.calories
+				? properties.calories.toFixed(2)
+				: 'No info',
+			label = properties.label ? properties.label : 'Title not available',
+			image = properties.image ? properties.image : 'Photo not available',
+			cuisineType = properties.cuisineType ? properties.cuisineType : 'No info',
+			cautions = properties.cautions ? properties.cautions : 'No info',
+			dietLabels = properties.dietLabels ? properties.dietLabels : 'No info',
+			healthLabels = properties.healthLabels
+				? properties.healthLabels
+				: 'No info',
+			yield = properties.yield ? properties.yield : 'No info',
+			dishType = properties.dishType ? properties.dishType : 'No info',
+			mealType = properties.mealType ? properties.mealType : 'No info',
+			totalTime = properties.totalTime
+				? `${properties.totalTime}min`
+				: 'No info',
+			totalWeight = properties.totalWeight
+				? `${properties.totalWeight.toFixed(2)}g`
+				: 'No info',
+			totalNutrients = properties.totalNutrients
+				? properties.totalNutrients
+				: 'No info',
+			url = properties.url ? properties.url : '',
+			source = properties.source ? properties.source : 'No info',
+			ingredientLines = properties.ingredientLines
+				? properties.ingredientLines
+				: 'No info';
+
+		// Separate diet labels in an array with a comma
+		const sortedDietLabels = dietLabels.join(', ');
+
+		// Separate cautions list in an array with a comma
+		const sortedCautions = cautions.join(', ');
+
+		// Create an li tag for each ingredient in the ingredientLines array
+		function createIngredientsList() {
+			const listedIngredients = ingredientLines.map((ingredient) => {
+				return `<li>${ingredient}</li>`;
+			});
+
+			// remove commas and join in a single string
+			const ingredients = listedIngredients.join('');
+
+			return ingredients;
 		}
 
+		// Create an li tag for each health label in the healthLabels array
+		function createHealthLabelsList() {
+			const listedHealthLabels = healthLabels.map((label) => {
+				return `<li>${label}</li>`;
+			});
+
+			// remove commas and join in a single string
+			const labels = listedHealthLabels.join('');
+
+			return labels;
+		}
+
+		// Create an li tag for nutrient in the totalNutrients json object
+		// ${createNutrientsList()}
+
+		// Output to the DOM
 		mealsSection.innerHTML += `
-			<h2>${hit.recipe.label}</h2>
-			<img class="meal-image" src="${hit.recipe.image}" alt="${hit.recipe.label}">
+			<h2>${label}</h2>
+
 			<p>Cuisine type: ${cuisineType}</p>
-			<p>Meal type: ${hit.recipe.mealType}</p>
-			<p>Dish type: ${hit.recipe.dishType}</p>
-			<p>Yield: ${hit.recipe.yield}</p>
-			<p>Calories: ${hit.recipe.calories}</p>
-			<p>Contains ${hit.recipe.cautions}</p>
-			<p>Diet labels: ${hit.recipe.dietLabels}</p>
-			<p>Diet labels: ${hit.recipe.healthLabels}</p>
-			
-			<p>Total nutrients:
-				<span>${hit.recipe.totalNutrients.CHOCDF.label},</span>
-				<span>${hit.recipe.totalNutrients.CHOCDF.quantity}%</span>
-			</p>
-			
+			<p>Meal type: ${mealType}</p>
+			<p>Dish type: ${dishType}</p>
+
+			<img class="meal-image" src="${image}" alt="${label}">
+
 			<ul>Ingredients:
-				<li>${hit.recipe.ingredientLines[0]}</li>
-				<li>${hit.recipe.ingredientLines[1]}</li>
-				<li>${hit.recipe.ingredientLines[2]}</li>
+				${createIngredientsList()}
 			</ul>
-			<p>Total time: ${hit.recipe.totalTime} min</p>
-			<p>Total weight: ${hit.recipe.totalWeight} g</p>
-			<p>Source: <a href="${hit.recipe.url}" target="_blank" rel="noopener">${hit.recipe.source}</a></p>
+
+			<p>Total time: ${totalTime}</p>
+
+			<p>Yield: ${yield}</p>
+			<p>Calories: ${calories}</p>
+			<p>Total weight: ${totalWeight}</p>
+			<p>Contains: ${sortedCautions}</p>
+			<p>Diet labels: ${sortedDietLabels}</p>
+			
+			<ul>Health labels:
+				${createHealthLabelsList()}
+			</ul>
+			
+			<ul>Total nutrients:
+			</ul>
+			
+			<p>Source: <a href="${url}" target="_blank" rel="noopener" title="${source} website">${source}</a></p>
 		`;
 	});
 };
 
 // ToDo:
-// decide which properties to render and in which order
-// Implement the rest of the checks for other properties
-// diet labels - there's too many of them
-// Total nutrients and weight round to 2-3 decimals
+// implement -l to the images
 // sort the design
